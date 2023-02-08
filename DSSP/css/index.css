@@ -1,0 +1,28 @@
+#loading {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(246, 240, 240);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000 !important;
+}
+
+span {
+  color: red;
+}
+#myModal {
+  z-index: 2 !important;
+}
+.modal-backdrop.show {
+  opacity: 0;
+}
+.modal-backdrop {
+  display: none;
+}
+#id {
+  display: none;
+}
