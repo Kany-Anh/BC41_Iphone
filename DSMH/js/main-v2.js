@@ -1,4 +1,9 @@
-import { danhSachSanPham } from "./controller-v2.js";
+import {
+  danhSachSanPham,
+  filterIphone,
+  gioiHanSoLuong,
+  soLuongIphone,
+} from "./controller-v2.js";
 
 let iphone2 = [
   {
@@ -50,14 +55,11 @@ let iphone2 = [
 danhSachSanPham(iphone2);
 window.danhSachSanPham = danhSachSanPham;
 
-const filterIphone = () => {
-  let filter = document.getElementById("type").value;
-  let newArr = iphone2.filter((item) => {
-    return item.type == filter;
-  });
-  danhSachSanPham(newArr);
-  if (filter == "" || filter == "0") {
-    danhSachSanPham(iphone2);
-  }
-};
+filterIphone(iphone2);
 window.filterIphone = filterIphone;
+
+soLuongIphone(iphone2);
+window.soLuongIphone = soLuongIphone;
+
+gioiHanSoLuong();
+window.gioiHanSoLuong = gioiHanSoLuong;
