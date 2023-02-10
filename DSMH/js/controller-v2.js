@@ -20,18 +20,6 @@ export const danhSachSanPham = (value) => {
   document.getElementById("danhSachSanPham").innerHTML = danhSach;
 };
 
-export const filterIphone = (value) => {
-  let filter = document.getElementById("type").value;
-  let newArr = value.filter((item) => {
-    return item.type == filter;
-  });
-  console.log("🚀 ~ file: controller-v2.js:28 ~ newArr ~ newArr", newArr);
-  danhSachSanPham(newArr);
-  if (filter == "0") {
-    danhSachSanPham(value);
-  }
-};
-
 let cart = [];
 export const soLuongIphone = (arrPhone) => {
   let arrButton = document.querySelectorAll(".iphone");
@@ -48,23 +36,55 @@ export const soLuongIphone = (arrPhone) => {
         }
       });
       console.log(cart);
+      renderGioHang();
     });
   });
+};
+
+const renderGioHang = () => {
   let cartList = "";
   cart.forEach((item) => {
-    cartList += `<img class='w-25' src="${item.img}" alt="">`;
+    cartList += ` <tr>
+                  <td><img class='w-100 p-2' src="${item.img}" alt=""></td>
+                  <td>${item.name}</td>
+                  <td>${item.price}</td>
+                  <td class=' text-center gioHangIphone id='${item.id}'>
+                  <button onclick='tangGiamSoLuong(false)' class="btn btn-primary">
+                  Giảm
+                  </button><br />
+                  ${item.amount}
+                  <button onclick='tangGiamSoLuong(true)' class="btn btn-success">
+                  Tăng
+                  </button></td>
+                  <td>
+                  <button class='btn btn-danger'>Xóa</button>
+                  </td>
+                  </tr>
+                 `;
   });
-  document.getElementById("danhSachGioHang").value = cartList;
-  console.log(
-    "🚀 ~ file: controller-v2.js:58 ~ soLuongIphone ~ cartList",
-    cartList
-  );
+  document.getElementById("tblDanhSachIphone").innerHTML = cartList;
+};
+
+export const tangGiamSoLuong = (value) => {
+  let gioHangIphone = document.querySelectorAll(".gioHangIphone");
+  gioHangIphone.forEach((i) => {
+    cart.forEach((item) => {
+      if (item.id == i.id) {
+        console.log("hello");
+        if (value == true) {
+          item.amount += 1;
+        } else {
+          item.amount -= 1;
+        }
+      }
+    });
+  });
 };
 
 export const gioiHanSoLuong = () => {
   cart.forEach((i) => {
     if (i.amount > 10) {
-      alert("Không thể mua 1 lần hơn 10 sản phẩm giống nhau ");
+      $("#gioiHanSoLuong").modal("toggle");
     }
   });
 };

@@ -1,8 +1,8 @@
 import {
   danhSachSanPham,
-  filterIphone,
-  gioiHanSoLuong,
   soLuongIphone,
+  tangGiamSoLuong,
+  gioiHanSoLuong,
 } from "./controller-v2.js";
 
 let iphone2 = [
@@ -31,7 +31,7 @@ let iphone2 = [
   {
     id: "3",
     name: "Samsung Galaxy M22",
-    price: 45000,
+    price: 4500,
     screen: "screen 70",
     backCamera: "Chính 12 MP & Phụ 64 MP, 12 MP",
     frontCamera: " 32 MP",
@@ -55,11 +55,21 @@ let iphone2 = [
 danhSachSanPham(iphone2);
 window.danhSachSanPham = danhSachSanPham;
 
-filterIphone(iphone2);
+const filterIphone = () => {
+  let filter = document.getElementById("type").value;
+  let newArr = iphone2.filter((item) => {
+    return item.type == filter;
+  });
+  danhSachSanPham(newArr);
+  if (filter == "0") {
+    danhSachSanPham(iphone2);
+  }
+};
 window.filterIphone = filterIphone;
 
 soLuongIphone(iphone2);
 window.soLuongIphone = soLuongIphone;
 
-gioiHanSoLuong();
+window.tangGiamSoLuong = tangGiamSoLuong;
+
 window.gioiHanSoLuong = gioiHanSoLuong;
