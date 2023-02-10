@@ -32,6 +32,7 @@ export const soLuongIphone = (arrPhone) => {
             cart.push({ ...phone, amount: 1 });
           } else {
             cart[index].amount += 1;
+            gioiHanSoLuong();
           }
         }
       });
@@ -48,7 +49,7 @@ const renderGioHang = () => {
                   <td><img class='w-100 p-2' src="${item.img}" alt=""></td>
                   <td>${item.name}</td>
                   <td>${item.price}</td>
-                  <td class=' text-center gioHangIphone id='${item.id}'>
+                  <td class=' text-center gioHangIphone' id='${item.id}'>
                   <button onclick='tangGiamSoLuong(false)' class="btn btn-primary">
                   Giảm
                   </button><br />
@@ -69,22 +70,26 @@ export const tangGiamSoLuong = (value) => {
   let gioHangIphone = document.querySelectorAll(".gioHangIphone");
   gioHangIphone.forEach((i) => {
     cart.forEach((item) => {
-      if (item.id == i.id) {
-        console.log("hello");
+      if (item.id === i.id) {
         if (value == true) {
-          item.amount += 1;
+          renderGioHang();
+          return (item.amount += 1);
         } else {
-          item.amount -= 1;
+          renderGioHang();
+          return (item.amount -= 1);
         }
       }
     });
   });
 };
 
-export const gioiHanSoLuong = () => {
-  cart.forEach((i) => {
-    if (i.amount > 10) {
-      $("#gioiHanSoLuong").modal("toggle");
-    }
-  });
+const gioiHanSoLuong = () => {
+  if (cart.length > 0) {
+    cart.forEach((i) => {
+      console.log(i);
+      if (i.amount > 10) {
+        $("#gioiHanSoLuong").modal("show");
+      }
+    });
+  }
 };

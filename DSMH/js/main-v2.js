@@ -2,7 +2,6 @@ import {
   danhSachSanPham,
   soLuongIphone,
   tangGiamSoLuong,
-  gioiHanSoLuong,
 } from "./controller-v2.js";
 
 let iphone2 = [
@@ -71,5 +70,3 @@ soLuongIphone(iphone2);
 window.soLuongIphone = soLuongIphone;
 
 window.tangGiamSoLuong = tangGiamSoLuong;
-
-window.gioiHanSoLuong = gioiHanSoLuong;
