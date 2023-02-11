@@ -32,7 +32,7 @@ export const soLuongIphone = (arrPhone) => {
             cart.push({ ...phone, amount: 1 });
           } else {
             cart[index].amount += 1;
-            gioiHanSoLuong();
+            return gioiHanSoLuong();
           }
         }
       });
@@ -50,11 +50,11 @@ const renderGioHang = () => {
                   <td>${item.name}</td>
                   <td>${item.price}</td>
                   <td class=' text-center gioHangIphone' id='${item.id}'>
-                  <button onclick='tangGiamSoLuong(false)' class="btn btn-primary">
+                  <button id='${item.id}' onclick='tangGiamSoLuong(false)' class="btn btn-primary">
                   Giảm
                   </button><br />
                   ${item.amount}
-                  <button onclick='tangGiamSoLuong(true)' class="btn btn-success">
+                  <button id='${item.id}' onclick='tangGiamSoLuong(true)' class="btn btn-success">
                   Tăng
                   </button></td>
                   <td>
@@ -62,6 +62,7 @@ const renderGioHang = () => {
                   </td>
                   </tr>
                  `;
+    tongTien(item);
   });
   document.getElementById("tblDanhSachIphone").innerHTML = cartList;
 };
@@ -73,10 +74,10 @@ export const tangGiamSoLuong = (value) => {
       if (item.id === i.id) {
         if (value == true) {
           renderGioHang();
-          return (item.amount += 1);
+          item.amount += 1;
         } else {
           renderGioHang();
-          return (item.amount -= 1);
+          item.amount -= 1;
         }
       }
     });
@@ -86,10 +87,19 @@ export const tangGiamSoLuong = (value) => {
 const gioiHanSoLuong = () => {
   if (cart.length > 0) {
     cart.forEach((i) => {
-      console.log(i);
       if (i.amount > 10) {
-        $("#gioiHanSoLuong").modal("show");
+        return $("#gioiHanSoLuong").modal("show");
       }
     });
   }
+};
+
+const tongTien = (iphoneGioHang) => {
+  let sotien = 0;
+  console.log("hello");
+  for (let i = 0; i < iphoneGioHang.length; i++) {
+    sotien += iphoneGioHang[i].price * iphoneGioHang[i].amount;
+    console.log("🚀 ~ file: controller-v2.js:101 ~ tongTien ~ sotien", sotien);
+  }
+  document.getElementById("soTien").innerHTML = sotien;
 };
